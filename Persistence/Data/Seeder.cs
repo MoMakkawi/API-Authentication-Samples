@@ -1,5 +1,5 @@
-﻿using Bearer_Authentication.Data;
-using Bearer_Authentication.Models;
+﻿using Persistence.Data;
+using Persistence.Models;
 
 public static class Seeder
 {

@@ -1,11 +1,13 @@
 using Basic_Authentication.Authentication;
-using Basic_Authentication.Contracts;
-using Basic_Authentication.Data;
 using Basic_Authentication.Repositories;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+
+using Persistence.Contracts;
+using Persistence.Data;
+using Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

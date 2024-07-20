@@ -1,8 +1,8 @@
-﻿using Bearer_Authentication.Models;
+﻿using Persistence.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Bearer_Authentication.Data;
+namespace Persistence.Data;
 
 public class BloggingContext(DbContextOptions<BloggingContext> options) : DbContext(options)
 {
@@ -12,6 +12,6 @@ public class BloggingContext(DbContextOptions<BloggingContext> options) : DbCont
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseInMemoryDatabase("BloggingDB2");
+            optionsBuilder.UseInMemoryDatabase("BloggingDB");
     }
 }

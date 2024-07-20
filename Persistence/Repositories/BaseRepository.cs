@@ -1,9 +1,9 @@
-﻿using Bearer_Authentication.Contracts;
-using Bearer_Authentication.Data;
+﻿using Persistence.Contracts;
+using Persistence.Data;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Bearer_Authentication.Repositories;
+namespace Persistence.Repositories;
 
 public class BaseRepository<T>(BloggingContext dbContext) : IBaseRepository<T> where T : class
 {

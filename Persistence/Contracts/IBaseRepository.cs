@@ -1,8 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿namespace Persistence.Contracts;
 
-namespace Basic_Authentication.Contracts;
-
-internal interface IBaseRepository<T> where T : class
+public interface IBaseRepository<T> where T : class
 {
     Task<T> AddAsync(T entity);
     Task<T> GetByIdAsync(int id);

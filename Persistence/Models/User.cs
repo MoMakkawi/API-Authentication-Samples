@@ -1,4 +1,4 @@
-﻿namespace Bearer_Authentication.Models;
+﻿namespace Persistence.Models;
 
 public class User
 {

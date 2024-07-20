@@ -1,16 +1,17 @@
 ﻿using System.Security.Claims;
 
-using Bearer_Authentication.Contracts;
-using Bearer_Authentication.Models;
 
 using Microsoft.AspNetCore.Authorization;
+
+using Persistence.Contracts;
+using Persistence.Models;
 
 internal static class BlogEndpoints
 {
     internal static void MapBlogEndpoints(this WebApplication app)
     {
         // public endpoints => it work for unauthorized and authorized users 
-        app.MapGet("/blogs", async (IBlogRepository blogRepository) 
+        app.MapGet("/blogs", async (IBlogRepository blogRepository)
             => await blogRepository.GetAllAsync());
 
         app.MapGet("/blogs/{id}", async (int id, IBlogRepository blogRepository)

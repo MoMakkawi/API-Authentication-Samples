@@ -1,8 +1,9 @@
 ﻿using System.Security.Claims;
 
-using Basic_Authentication.Contracts;
-
 using Microsoft.AspNetCore.Authorization;
+
+using Persistence.Contracts;
+using Persistence.Models;
 
 internal static class BlogEndpoints
 {

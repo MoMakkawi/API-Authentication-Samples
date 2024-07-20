@@ -1,4 +1,6 @@
-﻿public sealed class Blog
+﻿namespace Persistence.Models;
+
+public sealed class Blog
 {
     public int Id { get; set; }
     public required string Name { get; set; }
