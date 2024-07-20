@@ -1,8 +1,8 @@
-﻿using Basic_Authentication.Models;
+﻿using Bearer_Authentication.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Basic_Authentication.Data;
+namespace Bearer_Authentication.Data;
 
 public class BloggingContext(DbContextOptions<BloggingContext> options) : DbContext(options)
 {
@@ -12,6 +12,6 @@ public class BloggingContext(DbContextOptions<BloggingContext> options) : DbCont
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseInMemoryDatabase("BloggingDB1");
+            optionsBuilder.UseInMemoryDatabase("BloggingDB2");
     }
 }
