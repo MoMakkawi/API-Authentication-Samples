@@ -1,6 +1,6 @@
 ﻿namespace Bearer_Authentication.Options;
 
-public class JwtOption
+public class JwtOptions
 {
     public required string Issuer { get; set; }
     public required string Audience { get; set; }
