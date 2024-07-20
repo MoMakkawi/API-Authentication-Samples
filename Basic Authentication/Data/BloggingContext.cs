@@ -12,6 +12,6 @@ public class BloggingContext(DbContextOptions<BloggingContext> options) : DbCont
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseInMemoryDatabase("BloggingDB");
+            optionsBuilder.UseInMemoryDatabase("BloggingDB1");
     }
 }
