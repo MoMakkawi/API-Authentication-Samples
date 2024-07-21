@@ -23,8 +23,22 @@ public static class Seeder
         if (!context.Users.Any())
         {
             context.Users.AddRange(
-                new User { UserName = "Admin", Password = "Password" },
-                new User { UserName = "MoMakkawi", Password = "mohamad123" }
+                new User 
+                {
+                    Email= "Admin@mail.com",
+                    FirstName="Admin FN",
+                    LastName= "Admin LN",
+                    UserName = "Admin",
+                    Password = "Password" 
+                },
+                new User
+                {
+                    Email = "MoMakkawi@mail.com",
+                    FirstName = "Mo",
+                    LastName = "Makkawi",
+                    UserName = "MoMakkawi",
+                    Password = "Password123"
+                }
             );
 
             context.SaveChanges();
