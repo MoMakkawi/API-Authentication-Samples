@@ -37,12 +37,9 @@ internal static class BlogEndpoints
         // Not public endpoint => it work for only authorized user, only for Admin.
         app.MapPost("/blogs", [Authorize] async (Blog blog, HttpContext httpContext, IBlogRepository blogRepository, IUserRepository UserRepository) =>
         {
-            var userId = (httpContext.User.Identity as ClaimsIdentity)?
-            .FindFirst(ClaimTypes.NameIdentifier)?
-            .Value;
+            var currentUser = await UserRepository.GetLoginUserInfoAsync(httpContext);
 
-            if (!int.TryParse(userId, out int id) 
-            || await UserRepository.GetByIdAsync(id) is not { UserName: "Admin" })
+            if (currentUser is not { UserName: "Admin" })
                 return Results.BadRequest("Sorry, Only admin can do this.");
 
             blog = await blogRepository.AddAsync(blog);
