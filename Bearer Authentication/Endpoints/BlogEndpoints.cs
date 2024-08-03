@@ -18,7 +18,7 @@ internal static class BlogEndpoints
             .WithTags("Blogs");
 
         // Not public endpoint => it work for only authorized user.
-        app.MapPut(prefix + "/{id}", [Authorize] async (int id, Blog inputBlog, IBlogRepository blogRepository) =>
+        app.MapPut(prefix + "/{id}", async (int id, Blog inputBlog, IBlogRepository blogRepository) =>
         {
             var blog = await blogRepository.GetByIdAsync(id);
             if (blog is null) return Results.NotFound();
@@ -26,16 +26,18 @@ internal static class BlogEndpoints
             await blogRepository.UpdateAsync(blog);
 
             return Results.NoContent();
-        }).WithTags("Blogs");
+        }).WithTags("Blogs")
+        .RequireAuthorization();
 
-        app.MapDelete(prefix + "/{id}", [Authorize] async (int id, IBlogRepository blogRepository) =>
+        app.MapDelete(prefix + "/{id}", async (int id, IBlogRepository blogRepository) =>
         {
             await blogRepository.DeleteAsync(id);
             return Results.NoContent();
-        }).WithTags("Blogs");
+        }).WithTags("Blogs")
+        .RequireAuthorization();
 
         // Not public endpoint => it work for only authorized user, only for Admin.
-        app.MapPost(prefix, [Authorize] async (Blog blog, HttpContext httpContext, IBlogRepository blogRepository, IUserRepository UserRepository) =>
+        app.MapPost(prefix, async (Blog blog, HttpContext httpContext, IBlogRepository blogRepository, IUserRepository UserRepository) =>
         {
             var currentUser = await UserRepository.GetLoginUserInfoAsync(httpContext);
 
@@ -44,6 +46,7 @@ internal static class BlogEndpoints
 
             blog = await blogRepository.AddAsync(blog);
             return Results.Created($"/blogs/{blog.Id}", blog);
-        }).WithTags("Blogs");
+        }).WithTags("Blogs")
+        .RequireAuthorization();
     }
 }
