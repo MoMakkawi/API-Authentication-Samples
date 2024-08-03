@@ -3,6 +3,8 @@ using Bearer_Authentication.Authentication.Services;
 
 using Microsoft.AspNetCore.Mvc;
 
+using Persistence.Contracts;
+
 namespace Bearer_Authentication.Endpoints;
 internal static class UserEndpoints
 {
@@ -19,6 +21,22 @@ internal static class UserEndpoints
             {
                 throw new Exception(ex.Message);
             }
-        }).WithTags("Users");
+        }).WithTags("Users")
+        .AllowAnonymous();
+
+        app.MapPost(prefix + "/login-user-info", async (HttpContext httpContext, IUserRepository userRepository) => 
+        {
+           var currentUser = await userRepository.GetLoginUserInfoAsync(httpContext);
+
+            return new
+            {
+                currentUser.Id,
+                currentUser.UserName,
+                currentUser.Email,
+                FullName = currentUser.FirstName + " " + currentUser.LastName,
+            };
+
+        }).WithTags("Users")
+        .RequireAuthorization();
     }
 }
