@@ -17,7 +17,7 @@ internal static class UserEndpoints
             {
                 return await jwtAuthenticationService.LoginAsync(loginRequest);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
