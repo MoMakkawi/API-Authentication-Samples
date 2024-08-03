@@ -46,7 +46,7 @@ public class JwtAuthenticationService(JwtOptions jwtOptions, IUserRepository use
 
             Subject = new ClaimsIdentity(
                 [
-                    new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 ])
         };
 
