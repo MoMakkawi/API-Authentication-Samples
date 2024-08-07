@@ -3,11 +3,10 @@ using Persistence.Data;
 using Persistence.Models;
 
 using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace Basic_Authentication.Repositories;
+namespace Persistence.Repositories;
 
 public sealed class UserRepository(BloggingContext dbContext) : BaseRepository<User>(dbContext), IUserRepository
 {

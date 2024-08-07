@@ -1,5 +1,6 @@
-﻿using Persistence.Data;
-using Persistence.Models;
+﻿using Persistence.Models;
+
+namespace Persistence.Data;
 
 public static class Seeder
 {
@@ -23,13 +24,13 @@ public static class Seeder
         if (!context.Users.Any())
         {
             context.Users.AddRange(
-                new User 
+                new User
                 {
-                    Email= "Admin@mail.com",
-                    FirstName="Admin FN",
-                    LastName= "Admin LN",
+                    Email = "Admin@mail.com",
+                    FirstName = "Admin FN",
+                    LastName = "Admin LN",
                     UserName = "Admin",
-                    Password = "Password" 
+                    Password = "Password"
                 },
                 new User
                 {

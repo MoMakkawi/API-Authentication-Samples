@@ -1,7 +1,5 @@
 using System.Text;
 
-using Basic_Authentication.Repositories;
-
 using Bearer_Authentication.Authentication.Services;
 using Bearer_Authentication.Endpoints;
 using Bearer_Authentication.Options;

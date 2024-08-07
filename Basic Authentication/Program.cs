@@ -1,5 +1,4 @@
 using Basic_Authentication.Authentication;
-using Basic_Authentication.Repositories;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
