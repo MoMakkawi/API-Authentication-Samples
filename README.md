@@ -18,4 +18,33 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
   -  To make Endpoint Authorized Use `.RequireAuthorization()` or `[Authorize]`.
+  - if you use swagger don't forget to change it to make it support Basic Auth:
+```cs
+builder.Services.AddSwaggerGen(c =>
+{
+    // Add basic authentication scheme to Swagger document
+    c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "Basic",
+        Description = "Basic authentication header"
+    });
 
+    // Add a requirement to use the defined authentication scheme in all operations
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "basic"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
+```
