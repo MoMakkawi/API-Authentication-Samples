@@ -2,7 +2,36 @@
 Note: There a lot of way to implement those ideas but i will show you mine.
 ## Bearer Authentication:
 Most important things:
-  -   In [appsettings.json](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/appsettings.json) i added some options for JWT tokens and i injected those values with the [JwtOptions](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Options/JwtOptions.cs) class, i inject it in program file like : 
+  -  Then in the program file add Authentication & Authorization services and use them:
+```cs
+builder.Services
+    .AddAuthorization()
+    .AddAuthentication()
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            SaveSigninToken = true,
+
+            ValidateIssuer = true,
+            ValidIssuer = jwtOptions.Issuer,
+
+            ValidateAudience = true,
+            ValidAudience = jwtOptions.Audience,
+
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SigningKey))
+
+        };
+    });
+
+// Some Code ...
+
+app.UseAuthentication();
+app.UseAuthorization();
+```
+  -  In [appsettings.json](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/appsettings.json) i added some options for JWT tokens and i injected those values with the [JwtOptions](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Options/JwtOptions.cs) class, i inject it in program file like : 
 ```cs
 var jwtOptions = builder.Configuration
     .GetRequiredSection("JWT")
