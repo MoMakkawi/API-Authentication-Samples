@@ -1,4 +1,4 @@
-# ASP .NET Core Web API Security Implementation Samples :
+# ASP .NET Core Web API Authentication Implementation Samples :
 Note: There a lot of way to implement those ideas but i will show you mine.
 ## Bearer Authentication:
 Most important things:
