@@ -31,15 +31,15 @@ builder.Services
 app.UseAuthentication();
 app.UseAuthorization();
 ```
-  -  In [appsettings.json](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/appsettings.json) i added some options for JWT tokens and i injected those values with the [JwtOptions](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Options/JwtOptions.cs) class, i inject it in program file like : 
+  -  In [appsettings.json](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/appsettings.json) i added some options for JWT tokens and i injected those values with the [JwtOptions](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/Options/JwtOptions.cs) class, i inject it in program file like : 
 ```cs
 var jwtOptions = builder.Configuration
     .GetRequiredSection("JWT")
     .Get<JwtOptions>()!;
 builder.Services.AddSingleton(jwtOptions);
 ```
-  -  For Access Token and Refresh Token we interested in expiration date so I created models [TokenDetails](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Authentication/Models/TokenDetails.cs), [AuthResult](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Authentication/Models/AuthResult.cs) have Access and Refresh token details.
-  -  An important class is in [JwtAuthenticationService](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Authentication/Services/JwtAuthenticationService.cs), you will see the login service in this service the result is [AuthResult](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Bearer%20Authentication/Authentication/Models/AuthResult.cs) object, so we will generate Access and Refresh token and expiration dates, you will see `GenerateAccessToken` function in it create tokenDescriptor object that has Issuer and Audience and Expires, SigningCredentials we will determinate HS256 as encryption algorithm, and in Subject we add Claims, and for `GenerateRefreshToken` we can use any way to generate unique strings like `Guid.NewGuid()` or like we also worked on generated access token. 
+  -  For Access Token and Refresh Token we interested in expiration date so I created models [TokenDetails](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/Authentication/Models/TokenDetails.cs), [AuthResult](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/Authentication/Models/AuthResult.cs) have Access and Refresh token details.
+  -  An important class is in [JwtAuthenticationService](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/Authentication/Services/JwtAuthenticationService.cs), you will see the login service in this service the result is [AuthResult](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Bearer%20Authentication/Authentication/Models/AuthResult.cs) object, so we will generate Access and Refresh token and expiration dates, you will see `GenerateAccessToken` function in it create tokenDescriptor object that has Issuer and Audience and Expires, SigningCredentials we will determinate HS256 as encryption algorithm, and in Subject we add Claims, and for `GenerateRefreshToken` we can use any way to generate unique strings like `Guid.NewGuid()` or like we also worked on generated access token. 
   -  To make Endpoint Authorized you can use `.RequireAuthorization()`.
   -  If you are using swagger you must refactor it to make it support Bearer Auth:
 ```cs
@@ -76,7 +76,7 @@ builder.Services.AddSwaggerGen(c =>
 
 ## Basic Authentication:
 Most important things:
-  -  Create [BasicAuthenticationHandler](https://github.com/MoMakkawi/ASP.NET-Core-Web-API-Security-Sample/blob/master/Basic%20Authentication/Authentication/BasicAuthenticationHandler.cs) class That is inherent AuthenticationHandler class,
+  -  Create [BasicAuthenticationHandler](https://github.com/MoMakkawi/API-Authentication-Samples/blob/master/Basic%20Authentication/Authentication/BasicAuthenticationHandler.cs) class That is inherent AuthenticationHandler class,
   to implement the HandleAuthenticateAsync function in implementation,
  I check if there Authorization section in the header and I try to parse it to AuthenticationHeaderValue object,
  then I get the user name from the credentials after I decode it, I add my claims then I create AuthenticationTicket object.
